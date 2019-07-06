@@ -1,0 +1,16 @@
+---
+- name: apt update
+  apt:
+    update_cache: yes
+
+- name: install httpd
+  apt:
+    name: apache2
+
+- name: start httpd
+  systemd:
+    name: apache2.service
+    state: restarted
+    daemon_reload: yes
+    enabled: yes
+  become: yes

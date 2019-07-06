@@ -1,0 +1,9 @@
+---
+- name: create directories
+  file: path={{ item.path }} owner={{ item.owner }} group={{ item.group }} mode=0{{ item.mode }} state=directory
+  with_items:
+    - { "path":"/opt/ansible", "owner":"root", "group":"root", "mode":"755" }
+    - { "path":"/opt/vagrant", "owner":"vagrant", "group":"vagrant", "mode":"755" }
+
+- name: copy template files
+  template: src=../templates/fuga.j2 dest=/opt/ansible/fuga owner=root group=root mode=0755

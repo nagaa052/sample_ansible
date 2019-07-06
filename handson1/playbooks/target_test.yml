@@ -1,0 +1,17 @@
+- hosts: targets
+  user: vagrant
+  become: yes
+  vars_files:
+  - ../group_vars/targets/general.yml
+
+  tasks:
+    - name: output message.
+      debug: msg="{{ message }}"
+
+    - name: output fruits
+      debug: msg="We want {{ item.value.amount }} {{ item.key }} !" 
+      with_dict: "{{ fruits }}"
+
+  roles:
+    - { role: roles/file }
+    - { role: roles/apache2 }
