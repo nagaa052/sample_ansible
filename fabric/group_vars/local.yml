@@ -1,0 +1,3 @@
+# Specify users which will be able to access docker without root privileges
+docker_users:
+  - "{{ ansible_user }}"

@@ -1,0 +1,12 @@
+common_package_list:
+  - git
+  - gcc
+  - g++
+  - make
+  - unzip
+  - python-setuptools
+  - python-pip
+  - rsync
+
+pip_packages:
+  - docker

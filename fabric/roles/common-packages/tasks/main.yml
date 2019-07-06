@@ -1,0 +1,19 @@
+---
+- name: install aptitude
+  apt: pkg=aptitude
+
+- name: apt update
+  apt:
+    update_cache: yes
+
+- name: Install common packages.
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+    force: yes
+  loop: "{{ common_package_list }}"
+
+- name: Install docker driver for python.
+  pip:
+    name: "{{ item }}"
+  loop: "{{ pip_packages }}"

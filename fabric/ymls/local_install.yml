@@ -1,0 +1,11 @@
+- hosts: local
+  serial: 1
+  become: yes
+  vars_files:
+    - ../group_vars/local.yml
+  vars:
+    kafka_orderer: true
+  roles:
+    - roles/common-packages
+    - roles/docker
+    - roles/fabric
