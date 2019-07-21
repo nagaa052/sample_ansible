@@ -7,6 +7,7 @@ common_package_list:
   - python-setuptools
   - python-pip
   - rsync
+  - golang-1.10
 
 pip_packages:
   - docker

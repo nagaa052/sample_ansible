@@ -1,8 +1,8 @@
-- hosts: local
-  serial: 1
+- hosts: nodes
+  #serial: 1
   become: yes
   vars_files:
-    - ../group_vars/local.yml
+    - group_vars/all_vars.yml
   vars:
     kafka_orderer: true
   roles:

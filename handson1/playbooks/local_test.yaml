@@ -1,0 +1,9 @@
+- hosts: localhost
+  tasks:
+  - name: Clean local artifacts folder
+    file:
+      path: artifacts
+      state: "{{ item }}"
+    loop:
+      - "absent"
+      - "directory"

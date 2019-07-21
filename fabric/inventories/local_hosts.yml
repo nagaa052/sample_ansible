@@ -1,0 +1,37 @@
+---
+all:
+  hosts: # localhost connection parameters, used for storing configuration while transferring it between nodes
+    localhost:
+      ansible_connection: local
+  vars:
+    domain: example.com
+    orderer_type: solo
+  children:
+    nodes:
+      hosts:
+        orderer.example.com:
+          node_roles: # Describes which containers will run on this node
+            - root_orderer
+            - orderer
+            - peer
+            - root_peer
+            - explorer
+          org: mainorg # Organization name
+          ansible_host: 192.168.33.10 # Real ip address or domain name of the machine
+          ansible_user: vagrant # User with sudo access
+          ansible_private_key_file: /Users/a14846/workspace/src/github.com/nagaa052/sample_ansible/fabric/.vagrant/machines/default/virtualbox/private_key # Private key to identify ourselves
+        # # Same structure for any other nodes
+        # one.example.com:
+        #   node_roles:
+        #     - peer
+        #   org: one
+        #   ansible_host: 1.2.3.5
+        #   ansible_user: ubuntu
+        #   ansible_private_key_file: ~/test.pem
+        # two.example.com:
+        #   node_roles:
+        #     - peer
+        #   org: two
+        #   ansible_host: 1.2.3.6
+        #   ansible_user: ubuntu
+        #   ansible_private_key_file: ~/test.pem

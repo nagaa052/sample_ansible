@@ -13,7 +13,22 @@
     force: yes
   loop: "{{ common_package_list }}"
 
+- name: install language-pack-ja
+  apt: name={{ item }} update_cache=yes
+  with_items:
+    - language-pack-ja
+
+- name: create locale ja_JP.UTF-8
+  locale_gen:
+    name: ja_JP.UTF-8
+
+- name: change locale
+  command: update-locale LANG=ja_JP.UTF-8
+
 - name: Install docker driver for python.
   pip:
     name: "{{ item }}"
   loop: "{{ pip_packages }}"
+
+- name: install golang
+  shell: export PATH="/usr/lib/go-1.10/bin:$PATH"
