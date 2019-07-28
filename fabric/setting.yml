@@ -72,12 +72,6 @@
         dest: "{{ fabric_starter_workdir }}"
         recursive: yes
 
-    # - name: Transfer collections config
-    #   template:
-    #     src: "collections_config.json"
-    #     dest: "{{ collections_config_path }}"
-    #   when: "collections_config_path != ''"
-
     - name: Transfer peer configuration files
       template:
         src: "{{ item.from }}"
@@ -209,3 +203,5 @@
         raw: "docker exec 'cliNoCryptoVolume.{{ org }}.{{ domain }}' bash -c 'chown -R {{ ansible_user_uid }}:{{ ansible_user_gid }} .'"
 
     when: "'peer' in node_roles"
+    
+- import_playbook: start-network.yml

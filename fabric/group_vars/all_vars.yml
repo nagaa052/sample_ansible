@@ -53,8 +53,6 @@ chanicode_bilateral_init: '{"Args":["init","a","100","b","100"]}'
 # Define endorsement policy only in case there is a need
 chaincode_endorcement_policy_common: ""
 chaincode_endorcement_policy_bilateral: ""
-#chaincode_endorcement_policy_common: "OR({% for fabric_host in groups['nodes'] %}{% if ('peer' in hostvars[fabric_host].node_roles) %}{% raw %}'{% endraw %}{{ hostvars[fabric_host].org }}{% raw %}MSP.member'{% endraw %}{% if not loop.last %},{% endif %}{% endif %}{% endfor %})"
-#chaincode_endorcement_policy_bilateral: "OR({% for fabric_host in groups['nodes'] %}{% if 'root_peer' in hostvars[fabric_host].node_roles %}{% raw %}'{% endraw %}{{ hostvars[fabric_host].org }}{% raw %}MSP.member'{% endraw %}{% endif %}{% endfor %})"
 
 # Define private collections configuration
 collections_config_param: ""
