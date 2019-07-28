@@ -24,6 +24,12 @@ fabric_thirdparty_version: "0.4.14"
 fabric_rest_version: "latest"
 node_version: "8-alpine"
 
+# Hyperledger explorer configs
+hl_explorer_version: 0.3.9.3
+hl_explorer_port: 8080
+hl_explorer_username: "admin"
+hl_explorer_password: "adminpw"
+
 orderer_port: 7050
 
 api_port: 4000
@@ -49,6 +55,11 @@ chaincode_endorcement_policy_common: ""
 chaincode_endorcement_policy_bilateral: ""
 #chaincode_endorcement_policy_common: "OR({% for fabric_host in groups['nodes'] %}{% if ('peer' in hostvars[fabric_host].node_roles) %}{% raw %}'{% endraw %}{{ hostvars[fabric_host].org }}{% raw %}MSP.member'{% endraw %}{% if not loop.last %},{% endif %}{% endif %}{% endfor %})"
 #chaincode_endorcement_policy_bilateral: "OR({% for fabric_host in groups['nodes'] %}{% if 'root_peer' in hostvars[fabric_host].node_roles %}{% raw %}'{% endraw %}{{ hostvars[fabric_host].org }}{% raw %}MSP.member'{% endraw %}{% endif %}{% endfor %})"
+
+# Define private collections configuration
+collections_config_param: ""
+collections_config_name: ""
+collections_config_path: ""
 
 # Folders to create for configs
 fabric_artifacts_folders:
@@ -96,3 +107,12 @@ files_to_rsync_nodes_phase1:
     to: "crypto-config/ordererOrganizations/{{ domain }}/"
   - from: "channel"
     to: ""
+files_to_rsync_nodes_phase2:
+  - from: "*.block"
+    to: ""
+
+files_hl_explorer:
+  - from: "artifact-templates/explorer-config.json"
+    to: "{{ fabric_artifacts }}/explorer-config.json"
+  - from: "docker-compose-templates/docker-composetemplate-explorer.yaml"
+    to: "{{ docker_artifacts }}/docker-compose-explorer.yaml"

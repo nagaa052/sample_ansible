@@ -9,6 +9,8 @@ Usage:
     $(basename ${0}) [command] name
 Commands:
     install         install base package
+    setting         setting fabric network
+    start           start fabric network
 Options:
     --help, -h     print this
 EOF
@@ -17,12 +19,17 @@ EOF
 function install {
     cd ${current_path}
     #ansible-playbook --check -i inventories/local_hosts.yml ymls/local_install.yml --flush-cache -vvv
-    ansible-playbook -i inventories/local_hosts.yml local_install.yml --flush-cache -vvv
+    ansible-playbook -i inventories/hosts.yml install.yml --flush-cache -vvv
 }
 
 function setting {
     cd ${current_path}
-    ansible-playbook -i inventories/local_hosts.yml local_setting.yml --flush-cache -vvv
+    ansible-playbook -i inventories/hosts.yml setting.yml --flush-cache -vvv
+}
+
+function start {
+    cd ${current_path}
+    ansible-playbook -i inventories/hosts.yml start.yml --flush-cache -vvv
 }
 
 
@@ -34,6 +41,9 @@ case ${1} in
     ;;
     "setting" )
         setting
+    ;;
+    "start" )
+        start
     ;;
     "--help")
         usage
